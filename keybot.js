@@ -33,7 +33,7 @@ controller.hears('who has key (.*)',['direct_message','direct_mention','mention'
   });
 });
 
-controller.hears(['who has late key','who has late keys'],['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears(['who has late key','who has late keys', 'who has the late keys', 'who has the late key'],['direct_message','direct_mention','mention'],function(bot,message) {
   keyController.single(12, function(res) {
     bot.reply(message, res);
   });
@@ -47,7 +47,7 @@ controller.hears('i have key (.*)',['direct_message','direct_mention','mention']
   });
 });
 
-controller.hears(['i have late key',' i have late keys'],['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears(['i have late key',' i have late keys', 'i have the late keys', 'i have the late key'],['direct_message','direct_mention','mention'],function(bot,message) {
   var user = message.user;
   keyController.claim(12, user, function(res) {
     bot.reply(message, res);
@@ -61,7 +61,7 @@ controller.hears(['(.*) has key (.*)'], 'direct_message,direct_mention,mention',
 
     bot.api.users.info({user: user}, function(err, response) {
         if (err) {
-          bot.reply(message, 'User @' + user + 'does not exist.');
+          bot.reply(message, 'User @' + user + ' does not exist.');
         }
         else {
           keyController.claim(id, user, function(res) {
@@ -76,7 +76,7 @@ controller.hears(['(.*) has late key', '(.*) has late keys'], 'direct_message,di
         user = user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     bot.api.users.info({user: user}, function(err, response) {
         if (err) {
-          bot.reply(message, 'User @' + user + 'does not exist.');
+          bot.reply(message, 'User @' + user + ' does not exist.');
         }
         else {
           keyController.claim(12, user, function(res) {
