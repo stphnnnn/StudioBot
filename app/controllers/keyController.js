@@ -97,40 +97,28 @@ exports.unclaim = function(id, callback) {
   });
 }
 
+exports.create = function(id) {
+  Key.findOne({id: id}, function(err, key) {
+    if (err) console.log(err);
+    if (!key) {
+      var key = new Key({
+        id: id,
+        claimed: false
+      });
+      key.save(function(err) {
+        if (err) console.log(err);
+        console.log('Key ' + id + ' has been created.');
+      });
+    }
+    else {
+      console.log('Key ' + id + ' already exists.');
+    }
+  });
+}
 
-
-
-
-
-
-
-
-
-
-//private
-
-// exports.create = function(id) {
-//   Key.findOne({id: id}, function(err, key) {
-//     if (err) console.log(err);
-//     if (!key) {
-//       var key = new Key({
-//         id: id,
-//         claimed: false
-//       });
-//       key.save(function(err) {
-//         if (err) console.log(err);
-//         console.log('Key ' + id + ' has been created.');
-//       });
-//     }
-//     else {
-//       console.log('Key ' + id + ' already exists.');
-//     }
-//   });
-// }
-//
-// exports.delete = function(id) {
-//     Key.findOneAndRemove({ id: id }, function(err) {
-//       if (err) console.log(err);
-//       console.log('Key ' + id + ' has been deleted.');
-//     });
-// }
+exports.delete = function(id) {
+    Key.findOneAndRemove({ id: id }, function(err) {
+      if (err) console.log(err);
+      console.log('Key ' + id + ' has been deleted.');
+    });
+}
