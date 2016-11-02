@@ -70,7 +70,10 @@ exports.getDay = function (name, date, callback) {
       'return-empty': false
     }, function (err, cells) {
       var arr = [];
-      if (cells.length == 0) {
+      if (!cells) {
+        callback("I don't know what you're working on");
+      }
+      else if (cells.length == 0) {
         callback("You're free");
       }
       else {
@@ -104,7 +107,10 @@ exports.getWeek = function (name, date, callback) {
       'return-empty': false
     }, function (err, cells) {
       var week = {0:[],1:[],2:[],3:[],4:[]};
-      if (cells.length == 0) {
+      if (!cells) {
+        callback("I don't know what you're working on.");
+      }
+      else if (cells.length == 0) {
         callback("Nothing! Looks like you're free.");
       }
       else {
