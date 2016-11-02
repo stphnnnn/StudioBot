@@ -1,0 +1,19 @@
+{
+  "name": "somebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "somebot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "^0.4.0",
+    "dotenv": "^2.0.0",
+    "google-auth-library": "^0.9.9",
+    "google-spreadsheet": "^2.0.3",
+    "moment": "^2.15.2",
+    "mongoose": "^4.6.5"
+  }
+}

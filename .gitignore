@@ -1,0 +1,4 @@
+.DS_Store
+.env
+google-generated-creds.json
+node_modules/
