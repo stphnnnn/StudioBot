@@ -152,7 +152,7 @@ controller.hears(['this week'], 'direct_message', function(bot, message) {
   })
 });
 
-controller.hears(['next week'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['next week'], 'direct_message', function(bot, message) {
   var user = message.user;
       user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
   var date = moment().startOf('isoWeek').add(1, 'week').format('Do MMM');
