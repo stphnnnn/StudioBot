@@ -106,7 +106,7 @@ controller.hears(['give late key back', 'giving late key back', 'return late key
 //Scheduling functions
 var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
-controller.hears(['today'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['today'], 'direct_message', function(bot, message) {
   var user = message.user;
       user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
   var date = moment().format('Do MMM');
@@ -117,7 +117,7 @@ controller.hears(['today'], 'direct_message,direct_mention,mention', function(bo
     })
 });
 
-controller.hears(['tomorrow'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['tomorrow'], 'direct_message', function(bot, message) {
   var user = message.user;
       user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
   var date = moment().add(1, 'days').format('Do MMM');
@@ -128,7 +128,7 @@ controller.hears(['tomorrow'], 'direct_message,direct_mention,mention', function
   })
 });
 
-controller.hears(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'], 'direct_message', function(bot, message) {
   var user = message.user;
       user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
   nextDay(message.match[0].toLowerCase(), function(date, day) {
@@ -140,7 +140,7 @@ controller.hears(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'], 'dire
   })
 });
 
-controller.hears(['this week'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['this week'], 'direct_message', function(bot, message) {
   var user = message.user;
       user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
   var date = moment().startOf('isoWeek').format('Do MMM');
@@ -179,6 +179,6 @@ function nextDay(req, callback) {
   }
 }
 
-controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['(.*)'], 'direct_message', function(bot, message) {
   bot.reply(message, 'I don\'t understand what you are asking me to do...sorry.');
 });
