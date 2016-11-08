@@ -13,13 +13,14 @@ exports.list = function(callback) {
   Key.find(function (err, keys) {
     if (err) console.log(err);
     if (keys) {
-      callback('OK, here\'s a list of who has keys:');
+      var response = 'OK, here\'s a list of who has keys:\n';
       for (var i = 0; i < keys.length; i++) {
         if (keys[i].claimed) {
-          var user = "<@"+keys[i].user+">";
-          callback(keyType(keys[i].id) + ' belongs to ' + user + '.');
+          var user = at(keys[i].user);
+          var response = response + keyType(keys[i].id) + ' belongs to ' + user + '.\n';
         }
       }
+      callback(response);
     }
   });
 }
@@ -32,7 +33,7 @@ exports.single = function(id, callback) {
     }
     else {
       if (keys.claimed) {
-        var user = "<@"+keys.user+">";
+        var user = at(keys.user);
         callback(keyType(id) + ' belongs to ' + user + '.');
       }
       else {
@@ -49,9 +50,9 @@ exports.claim = function(id, user, callback) {
       callback('Key ' + id + ' does not exist.');
     }
     else {
-      var newUser = "<@"+user+">";
+      var newUser = at(user);
       if (keys.claimed) {
-        var oldUser = "<@"+keys.user+">";
+        var oldUser = at(keys.user);
         if (newUser == oldUser) {
           callback(keyType(id) + ' already belongs to ' + oldUser + '.');
         }
@@ -104,4 +105,8 @@ function keyType(id) {
   else {
     return('Key ' + id);
   }
+}
+
+function at(user) {
+  return('<@' + user + '>');
 }

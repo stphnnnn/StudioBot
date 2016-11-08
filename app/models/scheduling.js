@@ -113,6 +113,7 @@ exports.getWeek = function (name, date, callback) {
         callback("Nothing! Looks like you're free.");
       }
       else {
+        var response = "";
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
           var col = cell.col - dates[date];
@@ -131,8 +132,9 @@ exports.getWeek = function (name, date, callback) {
           else {
             var message = uniqueArray[0];
           }
-          callback(days[day] + ": " + message);;
+          response = response + days[day] + ": " + message +'\n';
         }
+        callback(response);
       }
     });
   });
