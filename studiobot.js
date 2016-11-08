@@ -2,7 +2,6 @@ require('dotenv').config()
 
 var Botkit = require('botkit');
 var mongoose = require('mongoose');
-_ = require('lodash');
 
 mongoose.connect(process.env.DBURL);
 mongoose.connection.on('connected', function () {
