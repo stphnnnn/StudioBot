@@ -1,4 +1,3 @@
-require('dotenv').config()
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require('app/google-generated-creds.json');
 

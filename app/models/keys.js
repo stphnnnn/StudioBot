@@ -1,13 +1,13 @@
-var Key = require('../models/key');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-function keyType(id) {
-  if (id == 12) {
-    return('Late key');
-  }
-  else {
-    return('Key ' + id);
-  }
-}
+var keySchema = new Schema({
+  id: { type: Number, required: true, unique: true },
+  user: { type: String },
+  claimed: { type: Boolean, default: false }
+});
+
+var Key = mongoose.model('Key', keySchema);
 
 exports.list = function(callback) {
   Key.find(function (err, keys) {
@@ -97,28 +97,11 @@ exports.unclaim = function(id, callback) {
   });
 }
 
-exports.create = function(id) {
-  Key.findOne({id: id}, function(err, key) {
-    if (err) console.log(err);
-    if (!key) {
-      var key = new Key({
-        id: id,
-        claimed: false
-      });
-      key.save(function(err) {
-        if (err) console.log(err);
-        console.log('Key ' + id + ' has been created.');
-      });
-    }
-    else {
-      console.log('Key ' + id + ' already exists.');
-    }
-  });
-}
-
-exports.delete = function(id) {
-    Key.findOneAndRemove({ id: id }, function(err) {
-      if (err) console.log(err);
-      console.log('Key ' + id + ' has been deleted.');
-    });
+function keyType(id) {
+  if (id == 12) {
+    return('Late key');
+  }
+  else {
+    return('Key ' + id);
+  }
 }
