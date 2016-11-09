@@ -16,3 +16,4 @@ var bot = controller.spawn({
 
 require('./app/controllers/keysController.js')(controller);
 require('./app/controllers/schedulingController.js')(controller);
+require('./app/controllers/holidayController.js')(controller);
