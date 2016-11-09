@@ -4,7 +4,6 @@ var creds = require('app/google-generated-creds.json');
 var spreadsheet = new GoogleSpreadsheet(process.env.SPREADSHEET);
 spreadsheet.useServiceAccountAuth(creds, function(err, token){
     spreadsheet.getInfo( function( err, sheet_info ){
-        console.log( sheet_info.title + ' is loaded' );
         task();
     });
 })
@@ -20,7 +19,6 @@ var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 function task() {
   getNames();
   getDates();
-  console.log("Getting names and dates...");
   setTimeout(task, 1000 * 60 * 5);
 }
 
