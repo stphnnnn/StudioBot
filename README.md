@@ -8,3 +8,6 @@ Pulls SomeOne scheduling data from Google Sheet to tell users what they should w
 
 ### Key tracking
 Keeps track of who has office keys at SomeOne.
+
+### Holiday
+Pulls SomeOne holiday data from Google Sheet to tell users how many days holiday they have left to take.
