@@ -1,7 +1,7 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require('app/google-generated-creds.json');
 
-var spreadsheet = new GoogleSpreadsheet(process.env.SPREADSHEET);
+var spreadsheet = new GoogleSpreadsheet(process.env.SCHEDULING);
 spreadsheet.useServiceAccountAuth(creds, function(err, token){
     spreadsheet.getInfo( function( err, sheet_info ){
         task();
