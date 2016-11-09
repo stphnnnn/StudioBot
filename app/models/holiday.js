@@ -1,4 +1,5 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
+var pluralize = require('pluralize')
 var creds = require('app/google-generated-creds.json');
 
 var spreadsheet = new GoogleSpreadsheet(process.env.HOLIDAY);
@@ -25,7 +26,6 @@ function getNames() {
       sheet = info.worksheets[i];
       users[sheet.title.toLowerCase()] = i;
     }
-    console.log(users);
   });
 }
 
@@ -39,11 +39,11 @@ exports.getHoliday = function (name, callback) {
       'max-col': daysLeftCol,
       'return-empty': false
     }, function (err, cells) {
-      if (!cells || cells.length == 0) {
+      if (err || !cells || cells.length == 0) {
         callback("I don't know how many days of holiday you have left.");
       }
       else {
-        callback("You have " + cells[0].value + " days of holiday left.");
+        callback("You have " + pluralize('day', cells[0].value, true) + " of holiday left.");
       }
     });
   });
