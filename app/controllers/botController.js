@@ -6,7 +6,7 @@ I can help you with all kinds of Studio-related questions! Try saying some of th
     · _"What am I working on this week?"_
     · _"Who has keys?"_
     · _"I have key 7"_
-If you need more help, a full list of available commands is available at https://git.io/vXr1k/ :smile:`;
+If you need more help, a full list of available commands is available at https://git.io/vXr1k :smile:`;
       bot.reply(message, res);
   });
 };
