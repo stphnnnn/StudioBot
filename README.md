@@ -25,3 +25,6 @@ Keeps track of who has office keys at SomeOne.
 Pulls SomeOne holiday data from Google Sheet to tell users how many days holiday they have left to take.
 ###### Available commands:
 `How much holiday do I have left?`
+
+#### Other commands:
+`Help me!`
