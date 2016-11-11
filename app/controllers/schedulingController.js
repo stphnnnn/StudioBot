@@ -52,9 +52,9 @@ module.exports = function(controller) {
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     var date = moment().startOf('isoWeek').add(1, 'week').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
-      bot.reply(message, "Here's what you're working on next week...");
       scheduling.getWeek(response.user.name, date, function(res) {
-        bot.reply(message, res);
+        bot.reply(message, "Here's what you're working on next week:\n" + res);
+
       });
     })
   });
