@@ -24,6 +24,7 @@ What am I working on next week?
 
 #### Key tracking
 Keeps track of who has office keys at SomeOne.
+<<<<<<< HEAD
 ###### Available commands:
 ```
 Who has keys?
@@ -52,3 +53,8 @@ How much holiday do I have left?
 ```
 Help me!
 ```
+=======
+
+#### Holiday
+Pulls SomeOne holiday data from Google Sheet to tell users how many days holiday they have left to take.
+>>>>>>> b61d87e44717397640bbda274e90343f986138a9
