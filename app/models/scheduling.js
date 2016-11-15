@@ -104,14 +104,11 @@ exports.getWeek = function (name, date, callback) {
       'return-empty': false
     }, function (err, cells) {
       var week = {0:[],1:[],2:[],3:[],4:[]};
-      if (!cells) {
-        callback("I don't know what you're working on.");
-      }
-      else if (cells.length == 0) {
-        callback("Nothing! Looks like you're free.");
+      if (!cells || cells.length == 0) {
+        callback(null);
       }
       else {
-        var response = "";
+        var response = [];
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
           var col = cell.col - dates[date];
@@ -130,7 +127,7 @@ exports.getWeek = function (name, date, callback) {
           else {
             var message = uniqueArray[0];
           }
-          response = response + days[day] + ": " + message +'\n';
+          response.push({text : days[day] + ": " + message, mrkdwn_in: ['text']});
         }
         callback(response);
       }

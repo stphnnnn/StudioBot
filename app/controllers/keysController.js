@@ -3,7 +3,14 @@ var keys = require('../models/keys');
 module.exports = function(controller) {
   controller.hears(['who has keys', 'who\'s got keys', 'who has the keys'],['direct_message','direct_mention','mention'],function(bot,message) {
     keys.list(function(res) {
-      bot.reply(message, res);
+      var reply = "I don't know who has keys."
+      if (res) {
+        reply = {
+          'text': 'Here\'s who has keys:',
+          'attachments': res
+        }
+      }
+      bot.reply(message, reply);
     });
   });
 

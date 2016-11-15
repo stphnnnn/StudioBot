@@ -13,14 +13,17 @@ exports.list = function(callback) {
   Key.find(function (err, keys) {
     if (err) console.log(err);
     if (keys) {
-      var response = 'OK, here\'s a list of who has keys:\n';
+      var response = [];
       for (var i = 0; i < keys.length; i++) {
         if (keys[i].claimed) {
           var user = at(keys[i].user);
-          var response = response + keyType(keys[i].id) + ' belongs to ' + user + '.\n';
+          response.push({text: keyType(keys[i].id) + ' belongs to ' + user, mrkdwn_in: ['text']});
         }
       }
       callback(response);
+    }
+    else {
+      callback(null);
     }
   });
 }
