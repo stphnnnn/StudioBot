@@ -103,15 +103,13 @@ exports.getWeek = function (name, date, callback) {
       'max-col': dates[date] + 4,
       'return-empty': false
     }, function (err, cells) {
+      console.log(cells);
       var week = {0:[],1:[],2:[],3:[],4:[]};
-      if (!cells) {
-        callback("I don't know what you're working on.");
-      }
-      else if (cells.length == 0) {
-        callback("Nothing! Looks like you're free.");
+      if (!cells || cells.length == 0) {
+        callback(null);
       }
       else {
-        var response = "";
+        var response = [];
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
           var col = cell.col - dates[date];
@@ -121,6 +119,7 @@ exports.getWeek = function (name, date, callback) {
           var uniqueArray = week[day].filter(function(elem, pos) {
             return week[day].indexOf(elem) == pos;
           });
+          console.log(uniqueArray);
           if (uniqueArray.length > 1) {
             var message = uniqueArray.slice(0, uniqueArray.length - 1).join(', ') + " and " + uniqueArray.slice(-1);
           }
@@ -130,7 +129,7 @@ exports.getWeek = function (name, date, callback) {
           else {
             var message = uniqueArray[0];
           }
-          response = response + days[day] + ": " + message +'\n';
+          response.push({text : days[day] + ": " + message, mrkdwn_in: ['text']});
         }
         callback(response);
       }
