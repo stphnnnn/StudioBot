@@ -1,12 +1,12 @@
 {
   "name": "StudioBot",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "",
   "main": "studiobot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Steve Burtenshaw",
   "license": "ISC",
   "dependencies": {
     "botkit": "^0.4.0",
