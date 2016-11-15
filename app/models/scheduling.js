@@ -103,7 +103,6 @@ exports.getWeek = function (name, date, callback) {
       'max-col': dates[date] + 4,
       'return-empty': false
     }, function (err, cells) {
-      console.log(cells);
       var week = {0:[],1:[],2:[],3:[],4:[]};
       if (!cells || cells.length == 0) {
         callback(null);
@@ -119,7 +118,6 @@ exports.getWeek = function (name, date, callback) {
           var uniqueArray = week[day].filter(function(elem, pos) {
             return week[day].indexOf(elem) == pos;
           });
-          console.log(uniqueArray);
           if (uniqueArray.length > 1) {
             var message = uniqueArray.slice(0, uniqueArray.length - 1).join(', ') + " and " + uniqueArray.slice(-1);
           }
