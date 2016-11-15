@@ -42,7 +42,14 @@ module.exports = function(controller) {
     var date = moment().startOf('isoWeek').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
       scheduling.getWeek(response.user.name, date, function(res) {
-        bot.reply(message, "Here's what you're working on this week:\n" + res);
+        var reply = "I don't know what you're working on."
+        if (res) {
+          reply = {
+            'text': 'Here\'s what you\'re working on next week:',
+            'attachments': res
+          }
+        }
+        bot.reply(message, reply);
       });
     })
   });
@@ -53,8 +60,14 @@ module.exports = function(controller) {
     var date = moment().startOf('isoWeek').add(1, 'week').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
       scheduling.getWeek(response.user.name, date, function(res) {
-        bot.reply(message, "Here's what you're working on next week:\n" + res);
-
+        var reply = "I don't know what you're working on."
+        if (res) {
+          reply = {
+            'text': 'Here\'s what you\'re working on next week:',
+            'attachments': res
+          }
+        }
+        bot.reply(message, reply);
       });
     })
   });
