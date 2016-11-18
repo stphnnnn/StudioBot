@@ -2,6 +2,9 @@ require('dotenv').config()
 
 var Botkit = require('botkit');
 var mongoose = require('mongoose');
+var ua = require('universal-analytics');
+
+var visitor = ua(process.env.UA);
 
 mongoose.connect(process.env.DBURL, { server: { reconnectTries: Number.MAX_VALUE } });
 
@@ -14,7 +17,7 @@ var bot = controller.spawn({
   retry: 10
 }).startRTM()
 
-require('./app/controllers/keysController.js')(controller);
-require('./app/controllers/schedulingController.js')(controller);
-require('./app/controllers/holidayController.js')(controller);
-require('./app/controllers/botController.js')(controller);
+require('./app/controllers/keysController.js')(controller, visitor);
+require('./app/controllers/schedulingController.js')(controller, visitor);
+require('./app/controllers/holidayController.js')(controller, visitor);
+require('./app/controllers/botController.js')(controller, visitor);
