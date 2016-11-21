@@ -1,6 +1,6 @@
 {
   "name": "StudioBot",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
   "main": "studiobot.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "google-spreadsheet": "^2.0.3",
     "moment": "^2.15.2",
     "mongoose": "^4.6.6",
-    "pluralize": "^3.0.0",
+    "pluralize": "^3.0.0"
   }
 }
