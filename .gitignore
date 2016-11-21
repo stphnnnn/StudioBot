@@ -2,3 +2,4 @@
 .env
 google-generated-creds.json
 node_modules/
+starter.sh
