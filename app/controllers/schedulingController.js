@@ -3,7 +3,6 @@ var moment = require('moment');
 
 module.exports = function(controller, visitor) {
   controller.hears(['today'], 'direct_message', function(bot, message) {
-    visitor.event('Scheduling', 'Today', message.match[0]).send();
     var user = message.user;
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     var date = moment().format('Do MMM');
@@ -15,7 +14,6 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['tomorrow'], 'direct_message', function(bot, message) {
-    visitor.event('Scheduling', 'Tomorrow', message.match[0]).send();
     var user = message.user;
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     var date = moment().add(1, 'days').format('Do MMM');
@@ -27,7 +25,6 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'], 'direct_message', function(bot, message) {
-    visitor.event('Scheduling', 'Day', message.match[0]).send();
     var user = message.user;
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     nextDay(message.match[0].toLowerCase(), function(date, day) {
@@ -40,7 +37,6 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['this week'], 'direct_message', function(bot, message) {
-    visitor.event('Scheduling', 'This week', message.match[0]).send();
     var user = message.user;
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     var date = moment().startOf('isoWeek').format('Do MMM');
@@ -59,7 +55,6 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['next week'], 'direct_message', function(bot, message) {
-    visitor.event('Scheduling', 'Next week', message.match[0]).send();
     var user = message.user;
         user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
     var date = moment().startOf('isoWeek').add(1, 'week').format('Do MMM');
