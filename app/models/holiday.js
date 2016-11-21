@@ -1,6 +1,6 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var pluralize = require('pluralize')
-var creds = require('app/google-generated-creds.json');
+var creds = require('../../google-generated-creds.json');
 
 var spreadsheet = new GoogleSpreadsheet(process.env.HOLIDAY);
 spreadsheet.useServiceAccountAuth(creds, function(err, token){

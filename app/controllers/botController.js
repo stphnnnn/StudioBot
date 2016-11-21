@@ -1,6 +1,5 @@
 module.exports = function(controller, visitor) {
   controller.hears(['help', 'what can i ask you', 'what can you do'], 'direct_message', function(bot, message) {
-      visitor.event('Bot', 'Help', message.match[0]).send();
       var res = `
 I can help you with all kinds of Studio-related questions! Try saying some of the following:
     · _"How much holiday do I have left?"_
@@ -11,6 +10,5 @@ If you need more help, a full list of available commands is available at https:/
       bot.reply(message, res);
   });
   controller.hears('(.*)', 'direct_message', function(bot, message) {
-    visitor.event('Bot', 'Unknown', message.match[0]).send();
   });
 };
