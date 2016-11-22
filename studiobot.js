@@ -20,5 +20,7 @@ require('./app/controllers/keysController.js')(controller);
 require('./app/controllers/schedulingController.js')(controller);
 require('./app/controllers/holidayController.js')(controller);
 
+controller.hears('(.*)', 'direct_message', function(bot, message){});
+
 controller.middleware.receive.use(dashbot.receive);
 controller.middleware.send.use(dashbot.send);

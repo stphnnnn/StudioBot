@@ -26,5 +26,4 @@ I can help you with all kinds of Studio-related questions! Try saying some of th
 If you need more help, a full list of available commands is available at https://git.io/vXr1k :smile:`;
       bot.reply(message, res);
   });
-  controller.hears('(.*)', 'direct_message', function(bot, message){});
 };
