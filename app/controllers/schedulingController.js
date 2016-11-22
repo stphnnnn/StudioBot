@@ -3,8 +3,7 @@ var moment = require('moment');
 
 module.exports = function(controller, visitor) {
   controller.hears(['today'], 'direct_message', function(bot, message) {
-    var user = message.user;
-        user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+    var user = message.user.replace(/[<>@]/g, '');
     var date = moment().format('Do MMM');
       bot.api.users.info({user: user}, function(err, response) {
         scheduling.getDay(response.user.name, date, function(res) {
@@ -14,8 +13,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['tomorrow'], 'direct_message', function(bot, message) {
-    var user = message.user;
-        user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+    var user = message.user.replace(/[<>@]/g, '');
     var date = moment().add(1, 'days').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
       scheduling.getDay(response.user.name, date, function(res) {
@@ -25,8 +23,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['monday', 'tuesday', 'wednesday', 'thursday', 'friday'], 'direct_message', function(bot, message) {
-    var user = message.user;
-        user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+    var user = message.user.replace(/[<>@]/g, '');
     nextDay(message.match[0].toLowerCase(), function(date, day) {
       bot.api.users.info({user: user}, function(err, response) {
         scheduling.getDay(response.user.name, date, function(res) {
@@ -37,8 +34,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['this week'], 'direct_message', function(bot, message) {
-    var user = message.user;
-        user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+    var user = message.user.replace(/[<>@]/g, '');
     var date = moment().startOf('isoWeek').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
       scheduling.getWeek(response.user.name, date, function(res) {
@@ -55,8 +51,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['next week'], 'direct_message', function(bot, message) {
-    var user = message.user;
-        user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+    var user = message.user.replace(/[<>@]/g, '');
     var date = moment().startOf('isoWeek').add(1, 'week').format('Do MMM');
     bot.api.users.info({user: user}, function(err, response) {
       scheduling.getWeek(response.user.name, date, function(res) {

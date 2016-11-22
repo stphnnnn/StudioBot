@@ -16,7 +16,6 @@ module.exports = function(controller, visitor) {
 
   controller.hears('who has key (.*)',['direct_message','direct_mention','mention'],function(bot,message) {
     var id = message.match[1];
-    id = id.replace(/['";:,.\/?\\-]/g, '');
     keys.single(id, function(res) {
       bot.reply(message, res);
     });
@@ -44,8 +43,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['(.*) has key (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
-      var user = message.match[1];
-          user = user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+      var user = message.match[1].replace(/[<>@]/g, '');
       var id = message.match[2];
 
       bot.api.users.info({user: user}, function(err, response) {
@@ -61,8 +59,7 @@ module.exports = function(controller, visitor) {
   });
 
   controller.hears(['(.*) has late key', '(.*) has late keys'], 'direct_message,direct_mention,mention', function(bot, message) {
-      var user = message.match[1];
-          user = user = user.replace(/['"<>@;:,.\/?\\-]/g, ''); //remove <@>
+      var user = message.match[1].replace(/[<>@]/g, '');
       bot.api.users.info({user: user}, function(err, response) {
           if (err) {
             bot.reply(message, 'User @' + user + ' does not exist.');
