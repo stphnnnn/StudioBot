@@ -1,3 +1,7 @@
+if (!process.env.SCHEDULING) {
+  throw new Error('"SCHEDULING" environment variable must be defined');
+}
+
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require('../../google-generated-creds.json');
 

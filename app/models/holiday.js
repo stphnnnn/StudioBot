@@ -1,3 +1,7 @@
+if (!process.env.HOLIDAY) {
+  throw new Error('"HOLIDAY" environment variable must be defined');
+}
+
 var GoogleSpreadsheet = require('google-spreadsheet');
 var pluralize = require('pluralize')
 var creds = require('../../google-generated-creds.json');
