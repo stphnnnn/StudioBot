@@ -15,10 +15,10 @@ var bot = controller.spawn({
   retry: 10
 }).startRTM()
 
+require('./app/controllers/botController.js')(controller);
 require('./app/controllers/keysController.js')(controller);
 require('./app/controllers/schedulingController.js')(controller);
 require('./app/controllers/holidayController.js')(controller);
-require('./app/controllers/botController.js')(controller);
 
 controller.middleware.receive.use(dashbot.receive);
 controller.middleware.send.use(dashbot.send);

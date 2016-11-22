@@ -52,3 +52,7 @@ How much holiday do I have left?
 ```
 Help me!
 ```
+Admins can post messages to users and channels
+```
+Say "Hello user" to @user
+```
