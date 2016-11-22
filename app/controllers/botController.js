@@ -16,7 +16,7 @@ module.exports = function(controller, visitor) {
       }
     })
   });
-  controller.hears(['help', 'what can i ask you', 'what can you do'], 'direct_message', function(bot, message) {
+  controller.hears(['help', 'what can i ask you', 'what can you do'], ['direct_message','direct_mention','mention'], function(bot, message) {
       var res = `
 I can help you with all kinds of Studio-related questions! Try saying some of the following:
     · _"How much holiday do I have left?"_
