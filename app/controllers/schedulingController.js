@@ -45,7 +45,7 @@ module.exports = function(controller, visitor) {
         var reply = "I don't know what you're working on."
         if (res) {
           reply = {
-            'text': 'Here\'s what you\'re working on next week:',
+            'text': 'Here\'s what you\'re working on this week:',
             'attachments': res
           }
         }
