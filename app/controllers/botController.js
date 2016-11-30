@@ -1,3 +1,21 @@
+function checkUser (bot, user, callback) {
+  bot.api.users.info({user: user}, function(err, res) {
+    if (!err) {
+      callback(true);
+    }
+    else {
+      bot.api.channels.info({channel: user}, function(err, res) {
+        if (!err) {
+          callback(true);
+        }
+        else {
+          callback(false);
+        }
+      });
+    }
+  });
+}
+
 module.exports = function(controller, visitor) {
   controller.hears('say ((.|\n)*) (in|to) (.*)', 'direct_message', function(bot, message) {
     var user = message.user.replace(/[<>@]/g, '');
@@ -5,11 +23,18 @@ module.exports = function(controller, visitor) {
       if (response.user.is_admin) {
         var channel = message.match[message.match.length-1].replace(/[<>@#]/g, '').split('|')[0];
         var response = message.match[1].replace(/["]/g, '')
-        bot.say({
-          text: response,
-          channel: channel
+        checkUser(bot, channel, function(res) {
+          if (res) {
+            bot.say({
+              text: response,
+              channel: channel
+            });
+            bot.reply(message, "Message sent to " + message.match[message.match.length-1]);
+          }
+          else {
+            bot.reply(message, "User or channel not found.");
+          }
         });
-        bot.reply(message, "Message sent to " + message.match[message.match.length-1]);
       }
       else {
         bot.reply(message, "You must be an Admin to use this function");
