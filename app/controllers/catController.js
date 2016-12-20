@@ -12,7 +12,7 @@ function getCat(callback) {
 }
 
 module.exports = function(controller, visitor) {
-  controller.hears(catEmojis, 'direct_message', function(bot, message) {
+  controller.hears(catEmojis, ['direct_message', 'direct_mention', 'mention'], function(bot, message) {
     getCat(function (catUrl) {
       var res = {
         'username': 'Meow Bot',
