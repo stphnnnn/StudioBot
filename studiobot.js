@@ -33,6 +33,6 @@ require('./app/controllers/catController.js')(controller);
 require('./app/controllers/keysController.js')(controller);
 require('./app/controllers/schedulingController.js')(controller);
 require('./app/controllers/holidayController.js')(controller);
-require('./app/controllers/kitchenController.js')(controller);
+require('./app/controllers/kitchenController.js')(controller, bot);
 
 controller.hears('(.*)', ['direct_message','direct_mention','mention'], function(bot, message){});
