@@ -14,12 +14,10 @@
     "dotenv": "^2.0.0",
     "google-auth-library": "^0.9.9",
     "google-spreadsheet": "^2.0.3",
-    "google-spreadsheet-to-json": "^0.3.0",
     "moment": "^2.15.2",
     "mongoose": "^4.6.6",
     "node-schedule": "^1.2.0",
     "pluralize": "^3.0.0",
-    "request": "^2.79.0",
-    "spreadsheet-to-json": "^1.0.5"
+    "request": "^2.79.0"
   }
 }
