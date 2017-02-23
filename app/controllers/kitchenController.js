@@ -7,7 +7,7 @@ var schedule = require('node-schedule');
 var GoogleSpreadsheet = require('google-spreadsheet');
 var creds = require('../../google-generated-creds.json');
 
-var spreadsheet = new GoogleSpreadsheet('1-XZbMAYFznvJe1nV1Q7ptC8UX1f0ia4vgpD2LRfq2OQ');
+var spreadsheet = new GoogleSpreadsheet(process.env.KITCHEN);
 
 var rota = {};
 
