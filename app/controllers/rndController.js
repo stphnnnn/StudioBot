@@ -7,7 +7,7 @@ module.exports = function(controller, visitor) {
           convo.ask('What would you like to announce?', function(response, convo) {
             bot.api.chat.postMessage({
               'channel': process.env.ANNOUNCEMENTS,
-              'username': 'RedNodeBot',
+              'username': 'RedNoseBot',
               'icon_emoji': ':red_circle:',
               'text': response.text
             }, function(err, res) {
