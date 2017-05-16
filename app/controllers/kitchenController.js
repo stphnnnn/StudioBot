@@ -41,6 +41,12 @@ module.exports = function(controller, bot) {
             text: 'It\'s your day for kitchen duties! :egg: :sparkles:',
             channel: user.id
           });
+          if (thisDay == 'tuesday' || 'thursday') {
+            bot.say({
+              text: 'You also need to take the recycling out after 4pm! (Feel free to ask those around you to help.) :recycle: :earth_africa:',
+              channel: user.id
+            });
+          }
         }
       });
     });
