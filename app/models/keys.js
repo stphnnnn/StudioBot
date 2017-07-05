@@ -27,6 +27,7 @@ module.exports = {
     Key.find(function (err, keys) {
       if (err) console.log(err);
       if (keys) {
+        keys.sort((a, b) =>  a.id - b.id);
         var response = [];
         for (var i = 0; i < keys.length; i++) {
           if (keys[i].claimed) {
@@ -34,6 +35,7 @@ module.exports = {
             response.push({text: keyType(keys[i].id) + ' belongs to ' + user, mrkdwn_in: ['text']});
           }
         }
+
         callback(response);
       }
       else {
