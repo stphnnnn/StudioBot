@@ -15,7 +15,10 @@ module.exports = function(controller, bot) {
 
   spreadsheet.useServiceAccountAuth(creds, function(err, token){
     spreadsheet.getInfo( function( err, sheet_info ){
-      var j = new schedule.scheduleJob('0 30 9 * * *', function() {
+      var j = new schedule.scheduleJob('30 9 * * *', function() {
+        getRota();
+      });
+      var j2 = new schedule.scheduleJob('30 14 * * *', function() {
         getRota();
       });
     });
