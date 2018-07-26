@@ -2,50 +2,82 @@ if (!process.env.KITCHEN) {
   throw new Error('"KITCHEN" environment variable must be defined');
 }
 
-var moment = require('moment');
-var schedule = require('node-schedule');
-var GoogleSpreadsheet = require('google-spreadsheet');
-var creds = require('../../google-generated-creds.json');
+const schedule = require('node-schedule')
+const GoogleSpreadsheet = require('google-spreadsheet')
+const creds = require('../../google-generated-creds.json')
 
-var spreadsheet = new GoogleSpreadsheet(process.env.KITCHEN);
+const spreadsheet = new GoogleSpreadsheet(process.env.KITCHEN)
 
-var rota = {};
-
-module.exports = function(controller, bot) {
-
-  spreadsheet.useServiceAccountAuth(creds, function(err, token){
-    spreadsheet.getInfo( function( err, sheet_info ){
-      var j = new schedule.scheduleJob('30 9 * * *', function() {
-        getRota();
-      });
-      var j2 = new schedule.scheduleJob('30 14 * * *', function() {
-        getRota();
-      });
-    });
-  });
-
-  function getRota() {
-    rota = {};
-    spreadsheet.getRows(1, function (err, rows) {
-      rows.forEach(function (row) {
-        rota[row.month.toLowerCase()] = Object.assign({}, row);
-      });
-      remindUser();
-    });
-  }
-
-  function remindUser() {
-    var thisDay = moment().format('dddd').toLowerCase();
-    var thisMonth = moment().format('MMMM').toLowerCase();
-    bot.api.users.list({}, function(err, response) {
-      response.members.forEach(function (user) {
-        if (user.name == rota[thisMonth][thisDay].toLowerCase()) {
-          bot.say({
-            text: 'It\'s your day for kitchen duties! :egg: :sparkles:',
-            channel: user.id
-          });
+function getRota() {
+  return new Promise((resolve, reject) => {
+    spreadsheet.getRows(1, (err, rows) => {
+      if (err) reject(err)
+      const rota = rows.reduce((acc, curr) => {
+        const month = curr.month.toLowerCase()
+        return {
+          ...acc,
+          [month]: curr
         }
-      });
-    });
+      }, {})
+      resolve(rota)
+    })
+  })
+}
+
+function getRotaUser(date, rota, bot) {
+
+  return new Promise((resolve, reject) => {
+
+    const locale = 'en-GB'
+    const weekday = date.toLocaleString(locale, { weekday: 'long' }).toLowerCase()
+    const month = date.toLocaleString(locale, { month: 'long' }).toLowerCase()
+  
+    const todaysUser = rota[month] && rota[month][weekday] && rota[month][weekday].toLowerCase()
+    
+    if (!todaysUser) reject('Given user is not a valid Slack member')
+
+    bot.api.users.list({}, (err, response) => {
+
+      if (err) reject(err)
+  
+      const userToMessage = response.members.find((user) => 
+        user.name.toLowerCase() === todaysUser || 
+        user.profile.display_name_normalized.toLowerCase() === todaysUser ||
+        user.profile.real_name_normalized.toLowerCase() === todaysUser
+      )
+
+      resolve(userToMessage)
+  
+    })
+
+  })
+
+}
+
+async function runTask(bot) {
+
+  try {
+    const rota = await getRota()
+    const user = await getRotaUser(new Date(), rota, bot)
+    bot.say({
+      text: 'It\'s your day for kitchen duties! :egg: :sparkles:',
+      channel: user.id
+    })
   }
+
+  catch(err) {
+    console.error(err)
+  }
+
+}
+
+module.exports = (controller, bot) => {
+
+  spreadsheet.useServiceAccountAuth(creds, (err, token) => {
+    spreadsheet.getInfo((err, info) => {    
+      const morning = new schedule.scheduleJob('30 9 * * *', () => runTask(bot))
+      const afternoon = new schedule.scheduleJob('30 14 * * *', () => runTask(bot))
+    })
+  })
+
 }
