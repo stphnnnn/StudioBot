@@ -14,7 +14,10 @@ var Botkit = require('botkit');
 var mongoose = require('mongoose');
 var dashbot = require('dashbot')(process.env.DASHBOT_API_KEY).slack;
 
-mongoose.connect(process.env.DBURL, { server: { reconnectTries: Number.MAX_VALUE } });
+mongoose.connect(process.env.DBURL, { 
+  useMongoClient: true,
+  reconnectTries: Number.MAX_VALUE
+})
 
 var controller = Botkit.slackbot({
   debug: false

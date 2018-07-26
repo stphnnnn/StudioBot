@@ -4,18 +4,19 @@
   "description": "",
   "main": "studiobot.js",
   "scripts": {
+    "start": "node studiobot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Steve Burtenshaw",
   "license": "ISC",
   "dependencies": {
-    "botkit": "^0.4.0",
+    "botkit": "^0.6.16",
     "dashbot": "^0.7.6",
     "dotenv": "^2.0.0",
     "google-auth-library": "^0.9.9",
-    "google-spreadsheet": "^2.0.3",
+    "google-spreadsheet": "^2.0.5",
     "moment": "^2.15.2",
-    "mongoose": "^4.6.6",
+    "mongoose": "^4.13.14",
     "node-schedule": "^1.2.0",
     "pluralize": "^3.0.0",
     "request": "^2.79.0"
